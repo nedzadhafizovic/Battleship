@@ -16,6 +16,7 @@ public class Player {
 	public Board boardToAttack = new Board();
 	public boolean isTurn;
 	public int count = ships.length;
+	public Player opponent;
 	
 	public Player() {
 		
@@ -39,8 +40,9 @@ public class Player {
 	public void displayBoards(Board b1, Board b2) {
 		System.out.print("*********YOUR BOARD**********");
 		System.out.print("          ");
-		System.out.print("*******BOARD YOU ATTACK*******\t\t\t" + "Ships left: " + count);
+		System.out.print("*******BOARD YOU ATTACK*******\t\t" + "Your fleet: " + count + " ships");
 		System.out.println();
+		System.out.print("\t\t\t\t\t\t\t\t\t\tOpponents's fleet: "  + opponent.count + " ships");
 		System.out.println();
 		for(int i = 0;i < 10; i++) {
 			System.out.print(i+1 + "  ");
@@ -369,6 +371,7 @@ public class Player {
 		
 		isTurn = false;
 		p.isTurn = true;
+		
 		
 	}
 	

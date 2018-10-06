@@ -38,6 +38,9 @@ public class Game {
 		System.out.print("Player 2, enter your name: ");
 		p2.name = scan1.next();
 		
+		p1.opponent = p2;
+		p2.opponent = p1;
+		
 		p1.board.initBoard();
 		p2.board.initBoard();
 		
