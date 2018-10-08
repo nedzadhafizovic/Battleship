@@ -1,4 +1,4 @@
-package Battleship;
+package BattleshipPackage;
 
 import java.util.Scanner;
 
@@ -87,46 +87,57 @@ public class Player {
 		orientation = scan.next(".").charAt(0);
 		
 		if(orientation == 'h') {
-			if(y <= 6) {
-				for(int i = 0; i < ships[0].size; i++) {
-					if(board.getCellStatus(x-1, (y - 1) + i) != 'o'){
-						flag = false;
+			if((x > 0 && x <= 10) && (y > 0 && y <= 10)) {
+				if(y <= 6) {
+					for(int i = 0; i < ships[0].size; i++) {
+						if(board.getCellStatus(x-1, (y - 1) + i) != 'o'){
+							flag = false;
+						}
 					}
-				}
-				if(flag) {
-					for(int i = 0; i < ships[0].size; i++)
-						board.carrierOn(x - 1, (y - 1) + i);
+					if(flag) {
+						for(int i = 0; i < ships[0].size; i++)
+							board.carrierOn(x - 1, (y - 1) + i);
+						board.displayBoard();
+					}else {
+						System.out.println("Another ship in position, set new corrdinates!");
+						setCarrier();
+					}
 				}else {
-					System.out.println("Another ship in position, set new corrdinates!");
+					System.out.println("Invalid, try again");
 					setCarrier();
 				}
 			}else {
-				System.out.println("Invalid, try again");
+				System.out.println("Invalid coordinates, try again!");
 				setCarrier();
 			}
 		}else if(orientation == 'v') {
-			if(x <= 6) {
-				for(int i = 0; i < ships[0].size; i++) {
-					if(board.getCellStatus((x - 1) + i, y - 1) != 'o') {
-						flag = false;
+			if((x > 0 && x <= 10) && (y > 0 && y <= 10)) {
+				if(x <= 6) {
+					for(int i = 0; i < ships[0].size; i++) {
+						if(board.getCellStatus((x - 1) + i, y - 1) != 'o') {
+							flag = false;
+						}
 					}
-				}
-				if(flag) {
-					for(int i = 0; i < ships[0].size; i++)
-						board.carrierOn((x - 1) + i, y - 1);
+					if(flag) {
+						for(int i = 0; i < ships[0].size; i++)
+							board.carrierOn((x - 1) + i, y - 1);
+						board.displayBoard();
+					}else {
+						System.out.println("Another ship in position, set new corrdinates!");
+						setCarrier();
+					}
 				}else {
-					System.out.println("Another ship in position, set new corrdinates!");
+					System.out.println("Invalid, try again!");
 					setCarrier();
-				}
+				}		
 			}else {
-				System.out.println("Invalid, try again!");
+				System.out.println("Invalid coordinates, try again!");
 				setCarrier();
-			}		
+			}
 		}else {
-			System.out.println("Invalid sign, try again!");
+			System.out.println("Invalid orientation sign! Try again!");
 			setCarrier();
 		}
-		board.displayBoard();
 	}
 	
 	public void setBattleship() throws Exception {
@@ -150,6 +161,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[1].size; i++)
 						board.battleshipOn(x - 1, (y - 1) + i);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setBattleship();
@@ -168,6 +180,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[1].size; i++)
 						board.battleshipOn((x - 1) + i, y - 1);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setBattleship();
@@ -177,15 +190,16 @@ public class Player {
 				setBattleship();
 			}		
 		}else {
-			System.out.println("Invalid sign, try again!");
+			System.out.println("Invalid orientation sign, try again!");
 			setBattleship();
 		}
-		board.displayBoard();
 	}
 	
 	public void setCruiser() throws Exception {
 		
 		boolean flag = true;
+		
+		System.out.println();
 		
 		System.out.print(name + ", set X corrdinate for your " + ships[2].getName() + "(size " + ships[2].getSize() + ")" + ": ");
 		int x = scan.nextInt();
@@ -204,6 +218,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[2].size; i++)
 						board.cruiserOn(x - 1, (y - 1) + i);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setCruiser();
@@ -222,6 +237,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[2].size; i++)
 						board.cruiserOn((x - 1) + i, y - 1);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setCruiser();
@@ -231,10 +247,9 @@ public class Player {
 				setCruiser();
 			}		
 		}else {
-			System.out.println("Invalid sign, try again!");
+			System.out.println("Invalid orientation sign, try again!");
 			setCruiser();
 		}
-		board.displayBoard();
 	}
 	
 	public void setSubmarine() throws Exception {
@@ -242,6 +257,8 @@ public class Player {
 		int y;
 		char orientation;
 		boolean flag = true;
+		
+		System.out.println();
 		
 		System.out.print(name + ", set X corrdinate for your " + ships[3].getName() + "(size " +ships[3].getSize() + ")" + ": ");
 		x = scan.nextInt();
@@ -260,6 +277,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[3].size; i++)
 						board.submarineOn(x - 1, (y - 1) + i);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setSubmarine();
@@ -278,6 +296,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[3].size; i++)
 						board.submarineOn((x - 1) + i, y - 1);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setSubmarine();
@@ -287,10 +306,9 @@ public class Player {
 				setSubmarine();
 			}		
 		}else {
-			System.out.println("Invalid sign, try again!");
+			System.out.println("Invalid orientation sign, try again!");
 			setSubmarine();
 		}
-		board.displayBoard();
 	}
 	
 	public void setDestroyer() throws Exception {
@@ -317,6 +335,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[4].size; i++)
 						board.destroyerOn(x - 1, (y - 1) + i);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setDestroyer();
@@ -335,6 +354,7 @@ public class Player {
 				if(flag) {
 					for(int i = 0; i < ships[4].size; i++)
 						board.destroyerOn((x - 1) + i, y - 1);
+					board.displayBoard();
 				}else {
 					System.out.println("Another ship in position, set new corrdinates!");
 					setDestroyer();
@@ -344,14 +364,15 @@ public class Player {
 				setDestroyer();
 			}		
 		}else {
-			System.out.println("Invalid sign, try again!");
+			System.out.println("Invalid orientation sign, try again!");
 			setDestroyer();
 		}
-		board.displayBoard();
 		
 	}
 	
 	public void play(Player p) throws Exception {
+		
+		
 		System.out.println();
 		Scanner scan1 = new Scanner(System.in);
 		System.out.println(name +", press ENTER to play!");
@@ -440,6 +461,7 @@ public class Player {
 			System.out.println("Miss!");
 			break;
 		}
+		
 	}
 	
 }
